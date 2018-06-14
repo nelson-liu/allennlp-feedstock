@@ -1,4 +1,6 @@
 channels:
+  targets:
+    - [allennlp, main]
   sources:
   - pytorch
   - conda-forge
