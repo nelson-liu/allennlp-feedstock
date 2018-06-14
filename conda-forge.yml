@@ -1,6 +1,13 @@
+channels:
+  sources:
+  - pytorch
+  - conda-forge
+  - defaults
 travis:
   secure:
     BINSTAR_TOKEN: NBryNn2bkbXAHq7pYkGRj7yimYfzEOfUncG2NzGZRZuMLJwxQOXqijXsSnLlOl/nPEyYMK29kGmxxsOAPyT3WogovnNasRS4gRyXpCPn6v5iKZINlj83JSDKgHIZpLj5T+9hHddzfXTo0GUlhgSLI3puR5Mviv4YAxnFDm46ZYxNA4xDiTUkVHhSWJelvFLic6CVRe1GfvIExKEbPo6SfikkslHWmamPT2WNcBCI2YxIscfqQs4t1RFS9XpkUjT70SpmSVQTT+d/mAHazqzU2gVxNvDw20pHKDLQR3WAPAt7tPwGmEpx+sl2I+otT8aVeTtO4XioMigLsGoSa1hYcdrngvoGyXmHGvjGM0+ioRYuvhZPKIcP8tou+ZVSlgFxNPKjjGxkOXvcdh1W/+B1tenmgWtZ0LvgemaFC+03K1SQEexkdeOfpOPKjalKt2lSEi1nlu62ToRjz4Q0ABZCjw8XTYRO6ce2iskToGZGYCBjYnPm+HrDXdMcal9toQJf2ZYe1i73838Uu7/+soHnI2x1vSYAlu43sfw83xsyap54CWh9SvdKyxszTKp5vL2fcYosXGm0UQbcBPchZAkvnLJrirVllWl5nXc7j4EWsJ8WAGIFRlk2OA64lqPnoJH94M1Z7i+d4Yd5zEikF+Q57pxzuIffJfQ4W006/8+DNGo=
 appveyor:
   secure:
     BINSTAR_TOKEN: 5nRsrK0FNETAS8VXVLc60FdseaFhIRIf1z/mf38zDpcu6P3yBBb9bm7QdFQ72m91
+docker:
+  image: allennlp/allennlp-conda-linux-anvil
