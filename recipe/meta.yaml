@@ -1,0 +1,123 @@
+{% set name = "allennlp" %}
+{% set version = "0.4.3" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "dbc0b7de268a14ad978ad29ceb785c0a22cab13e2786f04fe933b4c71e9ad7aa" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  url: https://github.com/allenai/allennlp/archive/v{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  skip: True  # [win or py<36]
+  number: 0
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - pip
+    - python
+  run:
+    - python
+    - pytorch ==0.3.1
+    - pyhocon ==0.3.35
+    - typing
+    - overrides
+    - nltk
+    - spacy >=2.0,<2.1
+    - numpy
+    - tensorboardx ==1.0
+    - cffi ==1.11.2
+    - awscli >=1.11.91
+    - flask ==0.12.1
+    - flask-cors ==3.0.3
+    - gevent ==1.2.2
+    - psycopg2
+    - requests >=2.18
+    - tqdm >=4.19
+    - editdistance
+    - h5py
+    - scikit-learn
+    - scipy
+    - pytz ==2017.3
+    - unidecode
+    - wget
+    - perl
+    - openjdk
+
+test:
+  imports:
+    - allennlp
+    - allennlp.commands
+    - allennlp.common
+    - allennlp.common.testing
+    - allennlp.data
+    - allennlp.data.dataset_readers
+    - allennlp.data.dataset_readers.coreference_resolution
+    - allennlp.data.dataset_readers.dataset_utils
+    - allennlp.data.dataset_readers.reading_comprehension
+    - allennlp.data.fields
+    - allennlp.data.iterators
+    - allennlp.data.token_indexers
+    - allennlp.data.tokenizers
+    - allennlp.models
+    - allennlp.models.coreference_resolution
+    - allennlp.models.encoder_decoders
+    - allennlp.models.reading_comprehension
+    - allennlp.models.semantic_parsing
+    - allennlp.models.semantic_parsing.nlvr
+    - allennlp.models.semantic_parsing.wikitables
+    - allennlp.modules
+    - allennlp.modules.seq2seq_encoders
+    - allennlp.modules.seq2vec_encoders
+    - allennlp.modules.similarity_functions
+    - allennlp.modules.span_extractors
+    - allennlp.modules.text_field_embedders
+    - allennlp.modules.token_embedders
+    - allennlp.nn
+    - allennlp.nn.decoding
+    - allennlp.nn.decoding.decoder_trainers
+    - allennlp.nn.regularizers
+    - allennlp.semparse
+    - allennlp.semparse.contexts
+    - allennlp.semparse.type_declarations
+    - allennlp.semparse.worlds
+    - allennlp.service
+    - allennlp.service.predictors
+    - allennlp.training
+    - allennlp.training.metrics
+  requires:
+    - pytest
+    - flaky
+    - responses >=0.7
+    - jupyter
+  source_files:
+    - tests
+    - tutorials
+    - scripts
+  commands:
+    - 'python -m nltk.downloader punkt'
+    - 'curl -L https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz -o ~/en_core_web_sm-2.0.0.tar.gz'
+    - 'tar -xf ~/en_core_web_sm-2.0.0.tar.gz -C ~'
+    - 'python -m spacy link ~/en_core_web_sm-2.0.0/en_core_web_sm en_core_web_sm'
+    - 'py.test -v tests/'
+    - 'rm ~/en_core_web_sm-2.0.0.tar.gz'
+    - 'rm -rf ~/en_core_web_sm-2.0.0'
+
+about:
+  home: https://github.com/allenai/allennlp
+  license: Apache 2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: An open-source NLP research library, built on PyTorch.
+  description: An open-source NLP research library, built on PyTorch.
+  doc_url: 'https://allenai.github.io/allennlp-docs/'
+  dev_url: 'https://github.com/allenai/allennlp'
+
+extra:
+  recipe-maintainers:
+    - nelson-liu
