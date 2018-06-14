@@ -39,7 +39,7 @@ docker run -it \
            -e CONFIG \
            -e BINSTAR_TOKEN \
            -e HOST_USER_ID \
-           condaforge/linux-anvil \
+           allennlp/allennlp-conda-linux-anvil \
            bash \
            /home/conda/feedstock_root/.circleci/build_steps.sh
 
