@@ -57,9 +57,6 @@ test:
     - allennlp.commands
     - allennlp.common
     - allennlp.common.testing
-    - allennlp.custom_extensions
-    - allennlp.custom_extensions._ext
-    - allennlp.custom_extensions._ext.highway_lstm_layer
     - allennlp.data
     - allennlp.data.dataset_readers
     - allennlp.data.dataset_readers.coreference_resolution
