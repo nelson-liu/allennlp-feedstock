@@ -1,8 +1,8 @@
 {% set name = "allennlp" %}
-{% set version = "0.4.3" %}
+{% set version = "0.5.1" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "dbc0b7de268a14ad978ad29ceb785c0a22cab13e2786f04fe933b4c71e9ad7aa" %}
+{% set hash_value = "88b402deabd3d76b0ef8655baa743d8dab26ef990076584c376a924bcf4da845" %}
 
 package:
   name: '{{ name|lower }}'
@@ -23,14 +23,14 @@ requirements:
     - python
   run:
     - python
-    - pytorch ==0.3.1
+    - pytorch ==0.4.0
     - pyhocon ==0.3.35
     - typing
     - overrides
     - nltk
     - spacy >=2.0,<2.1
     - numpy
-    - tensorboardx ==1.0
+    - tensorboardx ==1.2
     - cffi ==1.11.2
     - awscli >=1.11.91
     - flask ==0.12.1
@@ -45,6 +45,8 @@ requirements:
     - scipy
     - pytz ==2017.3
     - unidecode
+    - numpydoc ==0.8.0
+    - conllu
     - wget
     - perl
     - openjdk
@@ -72,6 +74,8 @@ test:
     - allennlp.models.semantic_parsing.nlvr
     - allennlp.models.semantic_parsing.wikitables
     - allennlp.modules
+    - allennlp.modules.attention
+    - allennlp.modules.matrix_attention
     - allennlp.modules.seq2seq_encoders
     - allennlp.modules.seq2vec_encoders
     - allennlp.modules.similarity_functions
@@ -82,6 +86,7 @@ test:
     - allennlp.nn.decoding
     - allennlp.nn.decoding.decoder_trainers
     - allennlp.nn.regularizers
+    - allennlp.predictors
     - allennlp.semparse
     - allennlp.semparse.contexts
     - allennlp.semparse.type_declarations
@@ -95,16 +100,12 @@ test:
     - flaky
     - responses >=0.7
     - jupyter
-  source_files:
-    - tests
-    - tutorials
-    - scripts
   commands:
     - 'python -m nltk.downloader punkt'
     - 'curl -L https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz -o ~/en_core_web_sm-2.0.0.tar.gz'
     - 'tar -xf ~/en_core_web_sm-2.0.0.tar.gz -C ~'
     - 'python -m spacy link ~/en_core_web_sm-2.0.0/en_core_web_sm en_core_web_sm'
-    - 'py.test -v tests/'
+    - 'allennlp test-install'
     - 'rm ~/en_core_web_sm-2.0.0.tar.gz'
     - 'rm -rf ~/en_core_web_sm-2.0.0'
 
