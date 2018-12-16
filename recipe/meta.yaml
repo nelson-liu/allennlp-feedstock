@@ -1,8 +1,8 @@
 {% set name = "allennlp" %}
-{% set version = "0.7.0" %}
+{% set version = "0.7.1" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "58d82bf09a4d2dcf80e925fd42007e44040c5afd7085db31660a492bd2ed747c" %}
+{% set hash_value = "d29faeb7365d282f9c7522d11e4a0879d220265fc61fb36de5dea9719cc9ee7f" %}
 
 package:
   name: '{{ name|lower }}'
