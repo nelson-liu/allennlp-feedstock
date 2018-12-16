@@ -1,8 +1,8 @@
 {% set name = "allennlp" %}
-{% set version = "0.7.0" %}
+{% set version = "0.7.1" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "58d82bf09a4d2dcf80e925fd42007e44040c5afd7085db31660a492bd2ed747c" %}
+{% set hash_value = "d29faeb7365d282f9c7522d11e4a0879d220265fc61fb36de5dea9719cc9ee7f" %}
 
 package:
   name: '{{ name|lower }}'
@@ -24,7 +24,7 @@ requirements:
     - python
   run:
     - python
-    - pytorch >=0.4.0,<0.5.0
+    - pytorch >=0.4.1,<0.5.0
     - jsonnet ==0.10.0
     - typing
     - overrides
@@ -36,9 +36,9 @@ requirements:
     - awscli >=1.11.91
     - boto3
     - moto ==1.3.4
-    - flask ==0.12.1
+    - flask ==0.12.4
     - flask-cors ==3.0.3
-    - gevent ==1.3.5
+    - gevent ==1.3.6
     - requests >=2.18
     - tqdm >=4.19
     - editdistance
@@ -47,6 +47,7 @@ requirements:
     - scipy
     - pytz ==2017.3
     - unidecode
+    - matplotlib ==2.2.3
     - numpydoc ==0.8.0
     - conllu ==0.11
     - wget
@@ -72,6 +73,7 @@ test:
     - allennlp.data.dataset_readers.dataset_utils
     - allennlp.data.dataset_readers.reading_comprehension
     - allennlp.data.dataset_readers.semantic_parsing
+    - allennlp.data.dataset_readers.semantic_parsing.wikitables
     - allennlp.data.fields
     - allennlp.data.iterators
     - allennlp.data.token_indexers
@@ -108,6 +110,7 @@ test:
     - allennlp.state_machines.states
     - allennlp.state_machines.trainers
     - allennlp.state_machines.transition_functions
+    - allennlp.tools
     - allennlp.training
     - allennlp.training.metrics
   requires:
