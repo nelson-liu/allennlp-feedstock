@@ -1,8 +1,8 @@
 {% set name = "allennlp" %}
-{% set version = "0.6.1" %}
+{% set version = "0.7.0" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "25d84495d1be526d0ad76432db03249626b98353b6296227e4367c3faf087cc5" %}
+{% set hash_value = "58d82bf09a4d2dcf80e925fd42007e44040c5afd7085db31660a492bd2ed747c" %}
 
 package:
   name: '{{ name|lower }}'
@@ -57,6 +57,8 @@ requirements:
     - parsimonious ==0.8.0
     - responses >=0.7
     - msgpack-python >=0.5.6,<0.6.0
+    - ftfy
+    - sqlparse ==0.2.4
 
 test:
   imports:
@@ -69,6 +71,7 @@ test:
     - allennlp.data.dataset_readers.coreference_resolution
     - allennlp.data.dataset_readers.dataset_utils
     - allennlp.data.dataset_readers.reading_comprehension
+    - allennlp.data.dataset_readers.semantic_parsing
     - allennlp.data.fields
     - allennlp.data.iterators
     - allennlp.data.token_indexers
@@ -78,7 +81,9 @@ test:
     - allennlp.models.encoder_decoders
     - allennlp.models.reading_comprehension
     - allennlp.models.semantic_parsing
+    - allennlp.models.semantic_parsing.atis
     - allennlp.models.semantic_parsing.nlvr
+    - allennlp.models.semantic_parsing.quarel
     - allennlp.models.semantic_parsing.wikitables
     - allennlp.modules
     - allennlp.modules.attention
@@ -90,21 +95,27 @@ test:
     - allennlp.modules.text_field_embedders
     - allennlp.modules.token_embedders
     - allennlp.nn
-    - allennlp.nn.decoding
-    - allennlp.nn.decoding.decoder_trainers
     - allennlp.nn.regularizers
     - allennlp.predictors
     - allennlp.semparse
     - allennlp.semparse.contexts
+    - allennlp.semparse.executors
     - allennlp.semparse.type_declarations
     - allennlp.semparse.worlds
     - allennlp.service
     - allennlp.service.predictors
+    - allennlp.state_machines
+    - allennlp.state_machines.states
+    - allennlp.state_machines.trainers
+    - allennlp.state_machines.transition_functions
     - allennlp.training
     - allennlp.training.metrics
   requires:
     - jupyter
+    - ipykernel <5.0.0
   commands:
+    # Travis' OSX tests require more open files.
+    - 'if [[ $TRAVIS == true ]]; then ulimit -n 2048 ; fi'  # [osx]
     - 'python -m nltk.downloader punkt'
     - 'curl -L https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz -o ~/en_core_web_sm-2.0.0.tar.gz'
     - 'tar -xf ~/en_core_web_sm-2.0.0.tar.gz -C ~'
