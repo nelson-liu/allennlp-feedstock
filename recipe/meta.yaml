@@ -114,6 +114,8 @@ test:
     - jupyter
     - ipykernel <5.0.0
   commands:
+    # Travis' OSX tests require more open files.
+    - 'if [[ $TRAVIS == true ]]; then ulimit -n 2048 ; fi'  # [osx]
     - 'python -m nltk.downloader punkt'
     - 'curl -L https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz -o ~/en_core_web_sm-2.0.0.tar.gz'
     - 'tar -xf ~/en_core_web_sm-2.0.0.tar.gz -C ~'
